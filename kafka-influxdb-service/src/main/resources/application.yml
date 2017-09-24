@@ -40,6 +40,7 @@ influxdb:
   batch-size: 200
   flush-duration-ms: 5000
   measurement: logs
+  tags: ${INFLUXDB_TAGS:HOSTNAME,app,level}
 
 app:
   loggger:

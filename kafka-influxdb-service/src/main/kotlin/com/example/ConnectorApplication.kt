@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.influxdb.InfluxDB
 import org.influxdb.dto.Point
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.event.ContextRefreshedEvent
@@ -22,7 +23,9 @@ class ConnectorApplication
 
 
 @Service
-class InfluxService(private val influxDB: InfluxDB) {
+class InfluxService(private val influxDB: InfluxDB,
+                    @Value(value = "\${influxdb.measurement}") private val measurement: String,
+                    @Value(value = "\${influxdb.tags}") private val tags: Array<String>) {
 
     var zoneId = ZoneId.systemDefault()
 
@@ -49,7 +52,7 @@ class InfluxService(private val influxDB: InfluxDB) {
 
     fun writeLog(log: Log) {
 
-        val logPoint = Point.measurement("logs")
+        val logPoint = Point.measurement(measurement)
                 .time(log.timestamp.atZone(zoneId).toInstant().toEpochMilli(), TimeUnit.MILLISECONDS)
                 .addField("version", log.version)
                 .addField("level_value", log.levelValue)
@@ -67,7 +70,7 @@ class InfluxService(private val influxDB: InfluxDB) {
     }
 
     fun writeLog(log: JsonNode) {
-        val logPoint = Point.measurement("logs")
+        val logPoint = Point.measurement(measurement)
         val timestamp =  LocalDateTime.parse(log.get("timestamp").asText(), DateTimeFormatter.ISO_OFFSET_DATE_TIME)
             .atZone(zoneId).toInstant().toEpochMilli()
 
@@ -75,7 +78,7 @@ class InfluxService(private val influxDB: InfluxDB) {
 
         log.fields().forEach {
             when (it.key) {
-                "HOSTNAME", "app", "level" -> logPoint.tag(it.key, log.get(it.key).asText())
+                in tags -> logPoint.tag(it.key, log.get(it.key).asText())
 
                 "version" -> logPoint.addField(it.key, log.get(it.key).asInt())
                 "level_value" -> logPoint.addField(it.key, log.get(it.key).asInt())

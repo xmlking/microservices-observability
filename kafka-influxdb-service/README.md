@@ -22,6 +22,8 @@ This component can scale horizontally on platforms like Mesos.
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 ```bash
 gradle kafka-influxdb-service:bootRun
+# add new tags
+INFLUXDB_TAGS=HOSTNAME,app,level,level_value gradle kafka-influxdb-service:bootRun
 # run with `docker` profile. 
 SPRING_PROFILES_ACTIVE=docker gradle kafka-influxdb-service:bootRun
 ```
