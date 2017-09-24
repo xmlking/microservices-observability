@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.util.run
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.boot.SpringApplication
@@ -157,7 +158,7 @@ class QuoteGenerator {
 //data class Quote(val ticker: String, val price: BigDecimal, val instant: Instant = Instant.now())
 
 fun main(args: Array<String>) {
-    SpringApplication.run(StreamApplication::class.java, *args)
+    run(StreamApplication::class, *args)
 //    SpringApplication(Application::class.java).apply {
 //        addInitializers(beans())
 //        run(*args)

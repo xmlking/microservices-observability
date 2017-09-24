@@ -12,7 +12,7 @@ buildscript {
 
     repositories {
         mavenCentral()
-        maven { setUrl("https://repo.spring.io/milestone") }
+        maven("https://repo.spring.io/milestone")
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
@@ -21,7 +21,7 @@ buildscript {
 }
 
 plugins {
-    val kotlinVersion = "1.1.4-3"
+    val kotlinVersion = "1.1.50"
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.RELEASE"
     val dockerPluginVersion = "0.13.0"
@@ -49,8 +49,8 @@ subprojects {
     repositories {
         mavenCentral()
         mavenLocal()
-        maven { setUrl("https://repo.spring.io/snapshot") }
-        maven { setUrl("https://repo.spring.io/milestone") }
+        maven("https://repo.spring.io/snapshot")
+        maven("https://repo.spring.io/milestone")
     }
 
     dependencies {
@@ -59,6 +59,7 @@ subprojects {
         compile("org.jetbrains.kotlin:kotlin-reflect")
         // Web
         compile("org.springframework.boot:spring-boot-starter-webflux")
+        // Testing
         testCompile("org.springframework.boot:spring-boot-starter-test") {
             exclude(module = "junit")
         }
@@ -85,7 +86,7 @@ subprojects {
         withType<KotlinCompile>().all {
             kotlinOptions {
                 jvmTarget = "1.8"
-                freeCompilerArgs = listOf("-Xjsr305-annotations=enable")
+                freeCompilerArgs = listOf("-Xjsr305=strict")
             }
         }
 

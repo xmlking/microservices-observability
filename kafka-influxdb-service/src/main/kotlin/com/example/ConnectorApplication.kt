@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.util.run
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.influxdb.InfluxDB
@@ -116,6 +117,6 @@ internal class AppLifecycleHooks(private val influxService: InfluxService,
 
 
 fun main(args: Array<String>) {
-    SpringApplication.run(ConnectorApplication::class.java, *args)
+    run(ConnectorApplication::class, *args)
 }
 

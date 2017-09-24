@@ -31,9 +31,6 @@ dependencies {
     }
 
     testCompile("org.testcontainers:testcontainers:$testcontainersVersion")
-
-    compile("com.fasterxml.jackson.module:jackson-module-kotlin")
-    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 /**

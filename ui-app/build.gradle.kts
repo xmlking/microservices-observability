@@ -33,9 +33,6 @@ dependencies {
     runtime("org.webjars:bootstrap:$bootstrapVersion")
     runtime("org.webjars:highcharts:$highchartsVersion")
     runtime("org.webjars.npm:xterm:$xtermVersion")
-
-    compile("com.fasterxml.jackson.module:jackson-module-kotlin")
-    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 /**

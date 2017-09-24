@@ -23,6 +23,10 @@ SPRING_PROFILES_ACTIVE=docker gradle cassandra-data-service:bootRun
 ```
 ### Test
 ```bash
+# start the dependent containers first... (TODO: issue with starting  delay of  cassandra)
+docker-compose -f docker-compose-infra.yml up cassandra
+docker-compose -f docker-compose-infra.yml up kafka
+# run the tests
 gradle cassandra-data-service:test
 ```
 ### Build

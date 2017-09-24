@@ -6,6 +6,7 @@ import com.example.util.*
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.*
 import org.springframework.web.reactive.function.server.ServerResponse.*
+import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 import java.net.URI.*
 import java.net.URLDecoder
@@ -17,7 +18,16 @@ class UserHandler(private val repository: UserRepository) {
             repository.findByLogin(URLDecoder.decode(req.pathVariable("login"), "UTF-8")).flatMap {
                 ok().render("user", mapOf(Pair("user", it.toDto())))
             }
+
     fun findOne(req: ServerRequest) = ok().json().body(repository.findByLogin(req.pathVariable("login")))
+        .switchIfEmpty(ServerResponse.notFound().build())
+
+    fun findById(req: ServerRequest): Mono<ServerResponse> {
+        val notFound = ServerResponse.notFound().build()
+        val id = req.pathVariable("id");
+        return repository.findById(id).flatMap { user -> ServerResponse.ok().body(Mono.just(user)) }
+            .switchIfEmpty(notFound)
+    }
 
     fun findAll(req: ServerRequest) = ok().json().body(repository.findAll())
     fun findAllStaff(req: ServerRequest) = ok().json().body(repository.findAllByRole(Role.STAFF))

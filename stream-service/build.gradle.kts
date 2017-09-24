@@ -26,9 +26,6 @@ dependencies {
 
     //compile("org.springframework.kafka:spring-kafka")
     compile("io.projectreactor.kafka:reactor-kafka:$reactorKafkaVersion")
-
-    compile("com.fasterxml.jackson.module:jackson-module-kotlin")
-    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 /**

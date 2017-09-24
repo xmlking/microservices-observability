@@ -1,8 +1,8 @@
 package com.example
 
+import com.example.util.run
 import org.hibernate.validator.constraints.NotBlank
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -160,7 +160,7 @@ data class GuestBookEntryVO(
 )
 
 fun main(args: Array<String>) {
-    SpringApplication.run(UiApplication::class.java, *args)
+    run(UiApplication::class, *args)
 }
 
 

@@ -9,6 +9,10 @@ As Developers are migrating from **Monolithic** architecture to distributed **mi
 
 This sample application showcases patterns to implement better **Observability** at web scale.
 
+![Reactive](./docs/microservices-observability.png "Microservices Observability")
+
+#### Log Aggregation 
+
 ![Reactive](./docs/microservices-observability.gif "Microservices Observability")
 
 #### Highlights
@@ -17,12 +21,12 @@ This sample application showcases patterns to implement better **Observability**
 * Monitoring solution for docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 * Vendor-neutral instrumentation
-    * Centralized Logging - SLF4J
+    * Log Aggregation - SLF4J
     * Distributed Tracking - [OpenTracing](http://opentracing.io/)
     * Application Metrics - [MicroMeter](http://micrometer.io/)
 * end-to-end `Functional Reactive Programming (FRP)` with Spring 5.
 * Multi-project builds with Gradle Kotlin Script. 
-* Kotlin as a language
+* Spring [Kotlin Support](https://docs.spring.io/spring-framework/docs/5.0.x/spring-framework-reference/kotlin.html)
 * Docker deployment
 
 ### Prerequisites
@@ -107,4 +111,6 @@ gradle --stop
 # refresh dependencies
 gradle build --refresh-dependencies
 ```
+
+### Reference 
 

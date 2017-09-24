@@ -27,9 +27,6 @@ dependencies {
 
     compile("org.influxdb:influxdb-java:$influxdbJavaVersion")
     compile("io.projectreactor.kafka:reactor-kafka:$reactorKafkaVersion")
-
-    compile("com.fasterxml.jackson.module:jackson-module-kotlin")
-    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 /**
