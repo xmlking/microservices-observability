@@ -1,0 +1,50 @@
+<configuration>
+    <springProperty name="topic" source="app.loggger.topic" defaultValue="applogs"/>
+    <springProperty name="bootstrapServers" source="app.loggger.bootstrapServers" defaultValue="kafka:9092"/>
+    <springProperty name="appName" source="spring.application.name" defaultValue="ui-app"/>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <!-- This is the kafkaAppender -->
+    <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+        <!-- This is the default encoder that encodes every log message to JSON  -->
+        <encoder class="com.github.danielwegener.logback.kafka.encoding.PatternLayoutKafkaMessageEncoder">
+            <layout class="net.logstash.logback.layout.LogstashLayout">
+                <fieldNames>
+                    <timestamp>timestamp</timestamp>
+                    <version>version</version>
+                </fieldNames>
+                <timeZone>UTC</timeZone>
+                <customFields>{"app":"${appName}"}</customFields>
+            </layout>
+        </encoder>
+        <topic>${topic}</topic>
+        <!-- we don't care how the log messages will be partitioned  -->
+        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.RoundRobinKeyingStrategy" />
+
+        <!-- use async delivery. the application threads are not blocked by logging -->
+        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />
+
+        <!-- each <producerConfig> translates to regular kafka-client config (format: key=value) -->
+        <!-- producer configs are documented here: https://kafka.apache.org/documentation.html#newproducerconfigs -->
+        <!-- bootstrap.servers is the only mandatory producerConfig -->
+        <producerConfig>bootstrap.servers=${bootstrapServers}</producerConfig>
+        <!-- don't wait for a broker to ack the reception of a batch.  -->
+        <producerConfig>acks=0</producerConfig>
+        <!-- wait up to 1000ms and collect log messages before sending them as a batch -->
+        <producerConfig>linger.ms=1000</producerConfig>
+        <!-- even if the producer buffer runs full, do not block the application but start to drop messages -->
+        <producerConfig>block.on.buffer.full=false</producerConfig>
+        <!-- define a client-id that you use to identify yourself against the kafka broker -->
+        <producerConfig>client.id=${HOSTNAME}-${CONTEXT_NAME}-logback</producerConfig>
+
+        <!-- this is the fallback appender if kafka is not available. -->
+        <appender-ref ref="CONSOLE" />
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="kafkaAppender" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

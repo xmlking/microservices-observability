@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Spring WebFlux Streaming"/>
+    <meta name="author" content="Brian Clozel and Sebastien Deleuze"/>
+    <title>Spring WebFlux Streaming</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/xterm/dist/xterm.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">DemoApp</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">GuestBook</a></li>
+                <li><a href="/quotes">Quotes</a></li>
+                <li class="active"><a href="/logs">Logs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+<div class="container wrapper">
+    <form class="form-inline well">
+        <div class="form-group">
+            <label for="hostname">Hostname</label>
+            <input type="text" class="form-control" id="hostname" placeholder="apsrt1452">
+        </div>
+        <div class="form-group">
+            <label for="appName">App Name</label>
+            <input type="text" class="form-control" id="appName" placeholder="ui-app">
+        </div>
+        <div class="form-group">
+            <label for="level">Level</label>
+            <select id="level" class="form-control">
+                <option value=""></option>
+                <option value="ERROR">ERROR</option>
+                <option value="WARN">WARN</option>
+                <option value="INFO">INFO</option>
+                <option value="DEBUG">DEBUG</option>
+                <option value="TRACE">TRACE</option>
+            </select>
+        </div>
+
+        <button id="clear" class="btn pull-right">Clear</button>
+    </form>
+    <div id="terminal-container" style="height: 600px; min-width: 800px"></div>
+</div>
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/xterm/dist/xterm.js"></script>
+<script type="text/javascript" src="/webjars/xterm/dist/addons/fit/fit.js"></script>
+<script type="text/javascript">
+
+    var term = new Terminal({
+        cursorBlink: true,
+        cols: 120,
+        rows: 80
+    });
+
+    term.open(document.getElementById('terminal-container'));
+    term.fit();
+
+    var stockEventSource = new EventSource("/logs/feed");
+    stockEventSource.onmessage = function (e) {
+        var hostname = document.getElementById('hostname').value;
+        var appName = document.getElementById('appName').value;
+        var level = document.getElementById('level').value;
+
+        if(hostname || appName || level) {
+            var data = JSON.parse(e.data);// FIXME: sometimes we get partial json
+            if( new RegExp(hostname, "g").test(data.HOSTNAME) &&
+                new RegExp(appName, "g").test(data.app) &&
+                new RegExp(level, "g").test(data.level) ) {
+                term.writeln(e.data)
+            }
+        } else {
+            term.writeln(e.data)
+        }
+    };
+
+    $( "#clear" ).click( function(event) {
+        event.preventDefault();
+        term.clear();
+    });
+
+
+</script>
+</body>
+</html>

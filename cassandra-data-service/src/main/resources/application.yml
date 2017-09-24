@@ -1,0 +1,41 @@
+server:
+  port: ${PORT:8081}
+#logging:
+#  level:
+#    root: debug
+#    com.datastax.driver.core.RequestHandler: TRACE
+endpoints:
+  default:
+    web:
+      enabled: true
+spring:
+  application:
+    name: cassandra-data-service
+  data:
+    cassandra:
+      keyspace-name: metric
+      create-keyspace: true
+      schema-action: CREATE_IF_NOT_EXISTS
+      contact-points: ${CASSANDRA_CONTACT_POINTS:localhost}
+      username: ${CASSANDRA_USERNAME:cassandra}
+      password: ${CASSANDRA_PASSWORD:cassandra}
+app:
+  loggger:
+    bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    topic: applogs
+
+---
+spring:
+  profiles: docker
+  data:
+    cassandra:
+      keyspace-name: sample
+      create-keyspace: true
+      contact-points: cassandra
+      username: cassandra
+      password: cassandra
+
+app:
+  loggger:
+    bootstrapServers: kafka:9092
+

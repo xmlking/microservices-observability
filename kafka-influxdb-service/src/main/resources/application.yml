@@ -1,0 +1,64 @@
+server:
+  port: ${PORT:8084}
+#logging:
+#  level:
+#    root: debug
+endpoints:
+  default:
+    web:
+      enabled: true
+spring:
+  application:
+    name: kafka-influxdb-service
+  kafka:
+    listener:
+      concurrency: 10
+    producer:
+      bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enableAutoCommit: false
+    template:
+      default-topic: applogs
+
+  jackson:
+    serialization:
+      write-date-timestamps-as-nanoseconds: false
+
+influxdb:
+  url: ${INFLUXDB_URL:http://localhost:8086}
+  username: admin
+  password: admin
+  database: applogs
+  retention-policy: three_day
+  consistency-level: ANY
+  batch-size: 200
+  flush-duration-ms: 5000
+  measurement: logs
+
+app:
+  loggger:
+    bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    topic: applogs
+
+---
+spring:
+  profiles: docker
+  kafka:
+    producer:
+      bootstrapServers: kafka:9092
+    consumer:
+      bootstrapServers: kafka:9092
+
+influxdb:
+  url: http://influxdb:8086
+
+app:
+  loggger:
+    bootstrapServers: kafka:9092
+

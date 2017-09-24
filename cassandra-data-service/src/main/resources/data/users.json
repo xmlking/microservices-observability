@@ -1,0 +1,102 @@
+[
+  {
+    "company": "The Flies",
+    "firstname": "Boo",
+    "lastname": "Loka",
+    "legacyId": 9,
+    "links": [],
+    "login": "booloka",
+    "emailHash": "92dfeb863138a5a9c0453ed80f9c8c75",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "Alexis",
+    "lastname": "Monville",
+    "legacyId": 17,
+    "links": [],
+    "login": "alexismonville",
+    "emailHash": "1de6a276595f75143c50c2d08b795ddf",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "Fabrice",
+    "lastname": "Aimetti",
+    "legacyId": 16,
+    "links": [],
+    "login": "Agilarium",
+    "emailHash": "d1a4b07474484ef24fbe9e54b669e437",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "Philippe",
+    "lastname": "Launay",
+    "legacyId": 18,
+    "links": [],
+    "login": "PhilAgile",
+    "emailHash": "cd1e1e108acfeda71ce370957fcea8b6",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "Antoine",
+    "lastname": "Vernois",
+    "legacyId": 20,
+    "links": [],
+    "login": "avernois",
+    "emailHash": "90cabf8640f0dded176b40486fda0e6e",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "Jean Claude",
+    "lastname": "Grosjean",
+    "legacyId": 24,
+    "links": [],
+    "login": "jcQualitystreet",
+    "emailHash": "ce98206cafbd137079c111d48d691640",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "Pablo",
+    "lastname": "Pernot",
+    "legacyId": 25,
+    "links": [],
+    "login": "pablopernot",
+    "emailHash": "cf1b8b7c132e9cfe063c6b6e902ce6a5",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "Emmanuel",
+    "lastname": "Bernard",
+    "legacyId": 30,
+    "links": [],
+    "login": "emmanuelbernard",
+    "emailHash": "9d09f05d50ce6624040126d9eaf727b8",
+    "role": "USER"
+  },
+  {
+    "company": "",
+    "firstname": "The",
+    "lastname": "Flies",
+    "legacyId": 31,
+    "links": [],
+    "login": "theflies",
+    "emailHash": "c1df3a0f97a9daac66cb6f35adb03368",
+    "role": "STAFF"
+  },
+  {
+    "company": "The Flies",
+    "firstname": "To",
+    "lastname": "Vincent",
+    "legacyId": 31,
+    "links": [],
+    "login": "gaconkzk",
+    "emailHash": "c1df3a0f97a9daac66cb6f35adb03368",
+    "role": "STAFF"
+  }
+]

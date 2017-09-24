@@ -1,0 +1,1 @@
+include 'shared', 'cassandra-data-service', 'stream-service', 'ui-app', 'kafka-influxdb-service'

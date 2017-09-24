@@ -1,0 +1,49 @@
+server:
+  port: ${PORT:8082}
+#logging:
+#  level:
+#    root: debug
+endpoints:
+  default:
+    web:
+      enabled: true
+spring:
+  application:
+    name: stream-service
+  kafka:
+    listener:
+      concurrency: 10
+    producer:
+      bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      group-id: ${spring.application.name}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enableAutoCommit: false
+    template:
+      default-topic: applogs
+
+  jackson:
+    serialization:
+      write-date-timestamps-as-nanoseconds: false
+app:
+  loggger:
+    bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    topic: applogs
+
+---
+spring:
+  profiles: docker
+  kafka:
+    producer:
+      bootstrapServers: kafka:9092
+    consumer:
+      bootstrapServers: kafka:9092
+
+app:
+  loggger:
+    bootstrapServers: kafka:9092
+

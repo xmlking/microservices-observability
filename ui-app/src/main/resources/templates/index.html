@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Spring WebFlux Streaming"/>
+    <meta name="author" content="Brian Clozel and Sebastien Deleuze"/>
+    <title>Spring WebFlux Streaming</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">DemoApp</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">GuestBook</a></li>
+                <li><a href="/quotes">Quotes</a></li>
+                <li><a href="/logs">Logs</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <h2>Comment</h2>
+            <form id="comment-form" method="POST" action="/guestbook">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" value="Sumo" class="form-control" id="name" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" id="comment" name="comment" placeholder="Comment" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-10">
+            <h2>GuestBook</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Comment</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody id="entries">
+                <tr th:each="entry: ${entries}">
+                    <td th:text="${entry.name}">Sumo</td>
+                    <td th:text="${entry.comment}">my comment</td>
+                    <td th:text="${entry.time}">Some Date</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    const commentForm = document.getElementById('comment-form');
+    commentForm.onsubmit = async function (event) {
+        event.preventDefault();
+        try {
+            const response = await fetch(commentForm.action, {
+                method: commentForm.method,
+                body: formDataToURLSearchParams(new FormData(commentForm))
+            });
+            const responseJson = await response.json();
+            console.log('responseJson', responseJson)
+        } catch (error) {
+            console.error('error', error)
+        }
+    };
+
+    function formDataToURLSearchParams(fd) {
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const params = new URLSearchParams();
+        if(isSafari) {
+            params.append('name',document.getElementById('name').value);
+            params.append('comment',document.getElementById('comment').value);
+        } else {
+            for (const pair of fd.entries()) {
+                if(pair[1]) {
+                    params.append(pair[0], pair[1]);
+                }
+            }
+        }
+        return params;
+    }
+</script>
+<script>
+    class GuestBook {
+        constructor() {
+            this.sourceUrl = "/guestbook/feed/Sumo";
+            this.entriesTable = document.getElementById("entries");
+        }
+
+        start() {
+
+            this.source = new EventSource(this.sourceUrl);
+            this.source.addEventListener("message", (event) => {
+                console.log('data1', event.data);
+                this.addRow(event.data);
+                document.getElementById('comment').value = "";
+            });
+            this.source.addEventListener('open', function (event) {
+                console.log('Connection was opened.', event)
+            });
+
+            this.source.addEventListener('error', function (event) {
+                if (event.readyState === EventSource.CLOSED) {
+                    console.log('Connection was closed.');
+                }
+                console.log('error:::', event);
+            });
+        }
+
+        addRow(entryRaw) {
+            let entry = JSON.parse(entryRaw);
+            let row = this.entriesTable.insertRow(0);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+
+            cell1.innerHTML = entry.name;
+            cell2.innerHTML = entry.comment;
+            cell3.innerHTML = entry.stringDate;
+        }
+
+        addHtmlRow(entryHtml) {
+            this.entriesTable.insertAdjacentHTML( 'beforeend', entryHtml );
+        }
+
+        stop() {
+            this.source.close();
+        }
+    }
+
+    guestBook = new GuestBook();
+    window.onload = function () {
+        guestBook.start();
+    };
+    window.onbeforeunload = function () {
+        guestBook.stop();
+    };
+</script>
+</body>
+</html>

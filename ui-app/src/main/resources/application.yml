@@ -1,0 +1,27 @@
+server:
+  port: ${PORT:8080}
+#logging:
+#  level:
+#    root: debug
+endpoints:
+  default:
+    web:
+      enabled: true
+spring:
+  application:
+    name: ui-app
+app:
+  cassandraApiUrl: ${CASSANDRA_API_URL:http://localhost:8081}
+  streamApiUrl: ${STREAM_API_URL:http://localhost:8082}
+  loggger:
+    bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    topic: applogs
+
+---
+spring:
+  profiles: docker
+
+app:
+  loggger:
+    bootstrapServers: kafka:9092
+
