@@ -10,6 +10,11 @@ endpoints:
 spring:
   application:
     name: ui-app
+  thymeleaf:
+#    check-template: false
+    reactive:
+      max-chunk-size: 8192
+
 app:
   cassandraApiUrl: ${CASSANDRA_API_URL:http://localhost:8081}
   streamApiUrl: ${STREAM_API_URL:http://localhost:8082}

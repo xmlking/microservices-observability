@@ -1,7 +1,7 @@
 package com.example
 
 import com.example.util.run
-import org.hibernate.validator.constraints.NotBlank
+import javax.validation.constraints.NotBlank
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
@@ -20,9 +20,9 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import javax.validation.Valid
 import io.micrometer.core.annotation.Timed
-import io.micrometer.core.instrument.binder.JvmThreadMetrics
-import io.micrometer.core.instrument.binder.ProcessorMetrics
-import io.micrometer.core.instrument.binder.JvmGcMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
+import io.micrometer.core.instrument.binder.system.ProcessorMetrics
 
 
 @SpringBootApplication

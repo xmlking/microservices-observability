@@ -39,11 +39,11 @@ This sample application showcases patterns to implement better **Observability**
 gradle build
 # continuous build with `-t`. 
 # this shoud be started before any run tasks i.e., `gradle ui-app:bootRun`, for spring's devtools to work.
-gradle -t build
+gradle build -x test -t
 # build all 3 apps
-gradle build -x test -x shared:build
+gradle build -x test
 # build all 3 docker images
-gradle docker -x test -x shared:build
+gradle docker -x test
 ```
 
 ### Test
@@ -104,7 +104,7 @@ docker ps
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version 4.2 --distribution-type all
+gradle wrapper --gradle-version 4.2.1 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop

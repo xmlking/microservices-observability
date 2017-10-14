@@ -32,6 +32,7 @@ gradle cassandra-data-service:test
 ### Build
 ```bash
 gradle cassandra-data-service:build
+gradle cassandra-data-service:build -x test -t 
 # skip test
 gradle cassandra-data-service:build -x test 
 # build docker image
