@@ -16,19 +16,22 @@
 *.iml
 *.ipr
 
-
 ### NetBeans ###
 nbproject/private/
 build/
-out/
 nbbuild/
 dist/
 nbdist/
 .nb-gradle/
 
-### Project ###
-TODO.md
-todo/
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
 
 ### Docker ###
 .testcontainers-tmp-*
+
+### Project ###
+TODO.md
+todo/
