@@ -18,6 +18,8 @@ UI Client App
 > use `./gradlew` instead of `gradle` if you didn't installed `gradle`
 ```bash
 gradle ui-app:bootRun
+# run with `docker` profile.
+SPRING_PROFILES_ACTIVE=docker gradle ui-app:bootRun
 ```
 ### Test
 ```bash
@@ -26,7 +28,8 @@ gradle ui-app:test
 ### Build
 ```bash
 gradle ui-app:build
-gradle ui-app:build -x test 
+# skip test
+gradle ui-app:build -x test
 # build docker image
 gradle ui-app:docker -x test 
 ```
