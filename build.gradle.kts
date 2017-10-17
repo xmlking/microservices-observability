@@ -38,13 +38,19 @@ plugins {
 
 subprojects {
 
+//    if (name.startsWith("shared")) {
+//        apply { plugin("org.gradle.sample.hello") }
+//    } else  {
+//        apply { plugin("org.gradle.sample.goodbye") }
+//    }
+
     apply {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
         plugin("org.jetbrains.kotlin.plugin.jpa")
-        plugin("org.springframework.boot")
         plugin("org.junit.platform.gradle.plugin")
         plugin("io.spring.dependency-management")
+        plugin("org.springframework.boot")
     }
 
     repositories {
