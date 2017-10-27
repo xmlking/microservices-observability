@@ -82,7 +82,7 @@ docker-compose  -f docker-compose-infra.yml up
 # connect(ssh) to a service and run a command
 docker-compose exec cassandra cqlsh
 # see logs of a service 
-docker-compose logs stream
+docker-compose logs -f stream
 # restart single service
 docker-compose restart stream
 # start single service
