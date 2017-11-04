@@ -137,10 +137,11 @@ class QuoteGenerator {
 
         var a = 0L
         var b = 1L
-
         while (true) {
             yield(b)
-
+            MDC.put("developer", "sumo")
+            log.error("test $a")
+            MDC.remove("developer")
             val next = a + b
             a = b; b = next
         }

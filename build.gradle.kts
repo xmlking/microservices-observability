@@ -24,7 +24,7 @@ plugins {
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.M5" //TODO: "2.0.0.RELEASE"
     val junitGradleVersion = "1.0.1"
-    val dockerPluginVersion = "0.13.0" //TODO: "0.14.0"
+    val dockerPluginVersion = "0.13.0" //TODO: "0.14.0" https://github.com/palantir/gradle-docker/issues/146
 
     base
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
@@ -75,6 +75,15 @@ subprojects {
         // Logging
         runtime("com.github.danielwegener:logback-kafka-appender:$logbackKafkaAppenderVersion")
         runtime("net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoderVersion")
+        runtime("ch.qos.logback.contrib:logback-json-classic:0.1.5") {
+            exclude(module = "logback-classic")
+            exclude(module = "logback-core")
+        }
+        runtime("ch.qos.logback.contrib:logback-jackson:0.1.5")
+        runtime("ch.qos.logback.contrib:logback-json-classic:0.1.5") {
+            exclude(module = "logback-classic")
+            exclude(module = "logback-core")
+        }
         // Tooling
         compileOnly("org.springframework:spring-context-indexer")
         compile("org.springframework.boot:spring-boot-devtools")

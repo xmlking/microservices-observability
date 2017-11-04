@@ -104,7 +104,7 @@ docker ps
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version 4.2.1 --distribution-type all
+gradle wrapper --gradle-version 4.3 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop
@@ -113,4 +113,5 @@ gradle build --refresh-dependencies
 ```
 
 ### Reference 
-
+* Reactive Spring and Kotlin-based Application
+    * https://github.com/johnsonr/flux-flix-service
