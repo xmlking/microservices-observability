@@ -1,6 +1,5 @@
 package com.example
 
-import com.example.util.run
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.boot.SpringApplication
@@ -27,6 +26,7 @@ import kotlin.coroutines.experimental.buildIterator
 import reactor.kafka.receiver.KafkaReceiver
 //import org.springframework.context.support.*
 import org.slf4j.MDC
+import org.springframework.boot.runApplication
 
 @SpringBootApplication
 class StreamApplication
@@ -159,7 +159,7 @@ class QuoteGenerator {
 //data class Quote(val ticker: String, val price: BigDecimal, val instant: Instant = Instant.now())
 
 fun main(args: Array<String>) {
-    run(StreamApplication::class, *args)
+    runApplication<StreamApplication>(*args)
 //    SpringApplication(Application::class.java).apply {
 //        addInitializers(beans())
 //        run(*args)

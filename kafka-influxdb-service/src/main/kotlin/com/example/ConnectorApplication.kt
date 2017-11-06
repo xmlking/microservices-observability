@@ -1,6 +1,5 @@
 package com.example
 
-import com.example.util.run
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.influxdb.InfluxDB
@@ -8,6 +7,7 @@ import org.influxdb.dto.Point
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 import org.springframework.context.event.ContextRefreshedEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
@@ -117,6 +117,6 @@ internal class AppLifecycleHooks(private val influxService: InfluxService,
 
 
 fun main(args: Array<String>) {
-    run(ConnectorApplication::class, *args)
+    runApplication<ConnectorApplication>(*args)
 }
 

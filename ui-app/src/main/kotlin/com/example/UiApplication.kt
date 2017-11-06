@@ -1,6 +1,5 @@
 package com.example
 
-import com.example.util.run
 import javax.validation.constraints.NotBlank
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -23,6 +22,7 @@ import io.micrometer.core.annotation.Timed
 import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
 import io.micrometer.core.instrument.binder.system.ProcessorMetrics
+import org.springframework.boot.runApplication
 
 
 @SpringBootApplication
@@ -160,7 +160,7 @@ data class GuestBookEntryVO(
 )
 
 fun main(args: Array<String>) {
-    run(UiApplication::class, *args)
+    runApplication<UiApplication>(*args)
 }
 
 

@@ -8,7 +8,7 @@ val kafkaVersion by project
 
 //uncomment this block for first time and run `./gradlew clean`, then you can remove this block. https://github.com/gradle/kotlin-dsl/issues/547
 //buildscript {
-//    val springBootVersion = "2.0.0.M5"
+//    val springBootVersion = "2.0.0.M6"
 //
 //    repositories {
 //        mavenCentral()
@@ -22,14 +22,13 @@ val kafkaVersion by project
 plugins {
     val kotlinVersion = "1.1.51"
     val springDependencyManagement = "1.0.3.RELEASE"
-    val springBootVersion = "2.0.0.M5" //TODO: "2.0.0.RELEASE"
+    val springBootVersion = "2.0.0.M6" //TODO: "2.0.0.RELEASE"
     val junitGradleVersion = "1.0.1"
     val dockerPluginVersion = "0.13.0" //TODO: "0.14.0" https://github.com/palantir/gradle-docker/issues/146
 
     base
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion apply false
-    id("org.jetbrains.kotlin.plugin.jpa") version kotlinVersion apply false
     id("org.springframework.boot") version springBootVersion apply false
     id("org.junit.platform.gradle.plugin") version junitGradleVersion apply false
     id("io.spring.dependency-management") version springDependencyManagement apply false
@@ -47,7 +46,6 @@ subprojects {
     apply {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
-        plugin("org.jetbrains.kotlin.plugin.jpa")
         plugin("org.junit.platform.gradle.plugin")
         plugin("io.spring.dependency-management")
         plugin("org.springframework.boot")
@@ -75,15 +73,6 @@ subprojects {
         // Logging
         runtime("com.github.danielwegener:logback-kafka-appender:$logbackKafkaAppenderVersion")
         runtime("net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoderVersion")
-        runtime("ch.qos.logback.contrib:logback-json-classic:0.1.5") {
-            exclude(module = "logback-classic")
-            exclude(module = "logback-core")
-        }
-        runtime("ch.qos.logback.contrib:logback-jackson:0.1.5")
-        runtime("ch.qos.logback.contrib:logback-json-classic:0.1.5") {
-            exclude(module = "logback-classic")
-            exclude(module = "logback-core")
-        }
         // Tooling
         compileOnly("org.springframework:spring-context-indexer")
         compile("org.springframework.boot:spring-boot-devtools")
