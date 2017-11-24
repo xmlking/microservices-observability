@@ -24,9 +24,11 @@ import java.time.Instant
 import java.util.*
 import kotlin.coroutines.experimental.buildIterator
 import reactor.kafka.receiver.KafkaReceiver
-//import org.springframework.context.support.*
 import org.slf4j.MDC
+import org.springframework.boot.ApplicationRunner
+import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.runApplication
+import org.springframework.context.support.beans
 
 @SpringBootApplication
 class StreamApplication
@@ -160,10 +162,18 @@ class QuoteGenerator {
 
 fun main(args: Array<String>) {
     runApplication<StreamApplication>(*args)
-//    SpringApplication(Application::class.java).apply {
-//        addInitializers(beans())
-//        run(*args)
-//    }
+//    SpringApplicationBuilder().initializers(
+//        beans {
+//            bean {
+//                ApplicationRunner {
+//                    val quoteGenerator = ref<QuoteGenerator>()
+//                    // to something
+//                }
+//            }
+//        }
+//    )
+//        .sources(StreamApplication::class.java)
+//        .run(*args)
 }
 
 

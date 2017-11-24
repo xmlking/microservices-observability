@@ -1,5 +1,13 @@
 server:
   port: ${PORT:8082}
+#  port: ${PORT:8482}
+#  http2:
+#    enabled: true
+#  ssl:
+#    key-store: classpath:keystore.jks
+#    key-store-password: secret
+#    key-password: password
+
 #logging:
 #  level:
 #    root: debug

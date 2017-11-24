@@ -6,21 +6,8 @@ val logbackKafkaAppenderVersion by project
 val logstashLogbackEncoderVersion by project
 val kafkaVersion by project
 
-//uncomment this block for first time and run `./gradlew clean`, then you can remove this block. https://github.com/gradle/kotlin-dsl/issues/547
-//buildscript {
-//    val springBootVersion = "2.0.0.M6"
-//
-//    repositories {
-//        mavenCentral()
-//        maven("https://repo.spring.io/milestone")
-//    }
-//    dependencies {
-//        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
-//    }
-//}
-
 plugins {
-    val kotlinVersion = "1.1.51"
+    val kotlinVersion = "1.1.60"
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.M6" //TODO: "2.0.0.RELEASE"
     val junitGradleVersion = "1.0.1"

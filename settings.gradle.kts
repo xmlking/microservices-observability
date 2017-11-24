@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url "https://jcenter.bintray.com/" }
+        maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://jcenter.bintray.com/") }
     }
 
     resolutionStrategy {
@@ -16,5 +16,4 @@ pluginManagement {
         }
     }
 }
-
-include 'shared', 'cassandra-data-service', 'stream-service', 'ui-app', 'kafka-influxdb-service'
+include("shared", "cassandra-data-service", "stream-service", "ui-app", "kafka-influxdb-service")

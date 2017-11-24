@@ -30,7 +30,7 @@ This sample application showcases patterns to implement better **Observability**
 * Docker deployment
 
 ### Prerequisites
-1. Gradle 4 (Install via [sdkman](http://sdkman.io/))
+1. Gradle 4.4 (Install via [sdkman](http://sdkman.io/))
 2. Docker for Mac [Setup Instructions](./docs/docker.md)
 
 ### Build
@@ -105,6 +105,7 @@ docker ps
 ```bash
 # upgrade project gradle version
 gradle wrapper --gradle-version 4.3 --distribution-type all
+gradle wrapper --gradle-version 4.4-rc-1 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop
