@@ -10,7 +10,7 @@ plugins {
     val kotlinVersion = "1.1.60"
     val springDependencyManagement = "1.0.3.RELEASE"
     val springBootVersion = "2.0.0.M6" //TODO: "2.0.0.RELEASE"
-    val junitGradleVersion = "1.0.1"
+    val junitGradleVersion = "1.0.2"
     val dockerPluginVersion = "0.13.0" //TODO: "0.14.0" https://github.com/palantir/gradle-docker/issues/146
 
     base
@@ -55,8 +55,8 @@ subprojects {
             exclude(module = "junit")
         }
         testCompile("org.junit.jupiter:junit-jupiter-api")
-        testRuntime("org.junit.jupiter:junit-jupiter-engine")
         testCompile("io.projectreactor:reactor-test")
+        testRuntime("org.junit.jupiter:junit-jupiter-engine")
         // Logging
         runtime("com.github.danielwegener:logback-kafka-appender:$logbackKafkaAppenderVersion")
         runtime("net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoderVersion")

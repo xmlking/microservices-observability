@@ -7,18 +7,22 @@ import org.junit.Test
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.extension.ExtendWith
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
+import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import reactor.core.publisher.Flux
 import reactor.test.test
 
-
-class ReactivePersonRepositoryTest() : AbstractIntegrationTests() {
-
-    @Autowired private lateinit var repository: UserRepository
+@ExtendWith(SpringExtension::class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+class ReactivePersonRepositoryTest(@LocalServerPort port: Int, @Autowired val repository: UserRepository) {
 
     @BeforeAll
-    override fun setup() {
+    fun setup() {
         println("ReactivePersonRepository setup")
         repository.deleteAll()
             .thenMany(repository.insert(Flux.just(
@@ -32,7 +36,7 @@ class ReactivePersonRepositoryTest() : AbstractIntegrationTests() {
     }
 
     @AfterAll
-    override fun teardown() {
+    fun teardown() {
         println("ReactivePersonRepository tearDown")
     }
 
