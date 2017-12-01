@@ -7,9 +7,9 @@ val logstashLogbackEncoderVersion by project
 val kafkaVersion by project
 
 plugins {
-    val kotlinVersion = "1.1.60"
+    val kotlinVersion = "1.2.0"
     val springDependencyManagement = "1.0.3.RELEASE"
-    val springBootVersion = "2.0.0.M6" //TODO: "2.0.0.RELEASE"
+    val springBootVersion = "2.0.0.M7" //TODO: "2.0.0.RELEASE"
     val junitGradleVersion = "1.0.2"
     val dockerPluginVersion = "0.13.0" //TODO: "0.14.0" https://github.com/palantir/gradle-docker/issues/146
 
@@ -50,6 +50,8 @@ subprojects {
         compile("org.jetbrains.kotlin:kotlin-reflect")
         // Web
         compile("org.springframework.boot:spring-boot-starter-webflux")
+        compile("com.fasterxml.jackson.module:jackson-module-kotlin")
+        compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
         // Testing
         testCompile("org.springframework.boot:spring-boot-starter-test") {
             exclude(module = "junit")

@@ -47,17 +47,17 @@ docker push
 
 #### Actuator End Points
 
-* http://localhost:8080/application/info
-* http://localhost:8080/application/health
-* http://localhost:8080/application/metrics
-* http://localhost:8080/application/prometheus
-* http://localhost:8080/application/env 
-* http://localhost:8080/application/beans
-* http://localhost:8080/application/loggers
-* http://localhost:8080/application/mappings
-* http://localhost:8080/application/auditevents
-* http://localhost:8080/application/autoconfig
-* http://localhost:8080/application/configprops
-* http://localhost:8080/application/threaddump
-* http://localhost:8080/application/heapdump
-* http://localhost:8080/application/trace
+* http://localhost:8080/actuator/info
+* http://localhost:8080/actuator/health
+* http://localhost:8080/actuator/metrics
+* http://localhost:8080/actuator/prometheus
+* http://localhost:8080/actuator/env 
+* http://localhost:8080/actuator/beans
+* http://localhost:8080/actuator/loggers
+* http://localhost:8080/actuator/mappings
+* http://localhost:8080/actuator/auditevents
+* http://localhost:8080/actuator/autoconfig
+* http://localhost:8080/actuator/configprops
+* http://localhost:8080/actuator/threaddump
+* http://localhost:8080/actuator/heapdump
+* http://localhost:8080/actuator/trace

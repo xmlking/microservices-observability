@@ -3,10 +3,12 @@ server:
 #logging:
 #  level:
 #    root: debug
-endpoints:
-  default:
+management:
+  endpoints:
     web:
-      enabled: true
+      expose: "*"
+      cors.allowed-origins: "*"
+      cors.allowed-methods: GET,POST,PUT,DELETE,HEAD
 spring:
   application:
     name: ui-app

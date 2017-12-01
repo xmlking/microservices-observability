@@ -104,13 +104,12 @@ docker ps
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version 4.3 --distribution-type all
-gradle wrapper --gradle-version 4.4-rc-1 --distribution-type all
+gradle wrapper --gradle-version 4.4-rc-5 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop
 # refresh dependencies
-gradle build --refresh-dependencies
+gradle build -x test --refresh-dependencies 
 ```
 
 ### Reference 

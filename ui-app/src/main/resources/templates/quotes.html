@@ -77,7 +77,7 @@
             })
             .forEach(function (serie) {
                 var shift = serie.data.length > 40;
-                serie.addPoint([quote.instant * 1000, quote.price], true, shift);
+                serie.addPoint([Date.parse(quote.instant), quote.price], true, shift);
             });
     };
     var stockEventSource = new EventSource("/quotes/feed");
