@@ -104,7 +104,7 @@ docker ps
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version 4.4-rc-5 --distribution-type all
+gradle wrapper --gradle-version 4.4 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop
