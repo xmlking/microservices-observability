@@ -92,6 +92,7 @@ docker-compose -f docker-compose-infra.yml up influxdb
 # check health for a service
 docker inspect --format "{{json .State.Health.Status }}" microservicesobservability_app_1
 docker ps
+docker-compose -f docker-compose-fluentd.yml up
 ```
 > Access UI App at http://localhost:8080
 
