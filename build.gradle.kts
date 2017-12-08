@@ -40,7 +40,6 @@ subprojects {
 
     repositories {
         mavenCentral()
-        mavenLocal()
         maven("https://repo.spring.io/milestone")
     }
 

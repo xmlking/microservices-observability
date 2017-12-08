@@ -34,7 +34,6 @@ gradle kafka-influxdb-service:test
 ```
 
 ### Build
-> you also have to build and publish `org.influxdb:influxdb-java:2.8-SNAPSHOT` locally as `2.8-SNAPSHOT` not released yet.
 ```bash
 gradle kafka-influxdb-service:build
 # skip test
