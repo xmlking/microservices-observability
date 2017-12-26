@@ -105,7 +105,7 @@ docker-compose -f docker-compose-fluentd.yml up
 ### Gradle Commands
 ```bash
 # upgrade project gradle version
-gradle wrapper --gradle-version 4.4 --distribution-type all
+gradle wrapper --gradle-version 4.4.1 --distribution-type all
 # gradle daemon status 
 gradle --status
 gradle --stop

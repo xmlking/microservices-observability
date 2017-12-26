@@ -1,3 +1,4 @@
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.dsl.SpringBootExtension
 import org.springframework.boot.gradle.tasks.run.BootRun
@@ -5,17 +6,20 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 val logbackKafkaAppenderVersion by project
 val logstashLogbackEncoderVersion by project
 val kafkaVersion by project
+val springCloudVersion by project
+val springCloudStreamVersion by project
 
 plugins {
     val kotlinVersion = "1.1.61"
     val springDependencyManagement = "1.0.4.RELEASE"
     val springBootVersion = "2.0.0.M7" //TODO: "2.0.0.RELEASE"
     val junitGradleVersion = "1.0.2"
-    val dockerPluginVersion = "0.13.0" //TODO: "0.14.0" https://github.com/palantir/gradle-docker/issues/146
+    val dockerPluginVersion = "0.17.2"
 
     base
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     id("org.jetbrains.kotlin.plugin.spring") version kotlinVersion apply false
+    id("org.jetbrains.kotlin.plugin.noarg") version kotlinVersion // apply false
     id("org.springframework.boot") version springBootVersion apply false
     id("org.junit.platform.gradle.plugin") version junitGradleVersion apply false
     id("io.spring.dependency-management") version springDependencyManagement apply false
@@ -33,6 +37,7 @@ subprojects {
     apply {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
+        plugin("org.jetbrains.kotlin.plugin.noarg")
         plugin("org.junit.platform.gradle.plugin")
         plugin("io.spring.dependency-management")
         plugin("org.springframework.boot")
@@ -42,6 +47,13 @@ subprojects {
         mavenCentral()
         maven("https://repo.spring.io/milestone")
     }
+
+//    configure<DependencyManagementExtension> {
+//        imports {
+//            mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+//            mavenBom("org.springframework.cloud:spring-cloud-stream-dependencies:$springCloudStreamVersion")
+//        }
+//    }
 
     dependencies {
         // kotlin
@@ -93,5 +105,8 @@ subprojects {
         buildInfo()
     }
 
+    noArg {
+        annotation("com.example.NoArg")
+    }
 }
 

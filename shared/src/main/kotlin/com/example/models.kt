@@ -16,6 +16,11 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
+// ----------------
+//  for Kotlin Gradle NoArg plugin
+// ----------------
+annotation class NoArg
+
 data class Quote(val ticker: String, val price: BigDecimal, val instant: Instant = Instant.now())
 
 data class GuestBookEntryDTO(
@@ -61,3 +66,7 @@ class MyLocalDateTimeSerializer : StdSerializer<LocalDateTime>(LocalDateTime::cl
         gen.writeString(value.atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME  ))
     }
 }
+
+
+@NoArg
+class Test(val id: Int)
